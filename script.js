@@ -1,20 +1,27 @@
-//your JS code here. If required.
-const inputs = document.querySelectorAll(".code");
+document.addEventListener("DOMContentLoaded", () => {
+  const inputs = document.querySelectorAll(".code");
 
-inputs[0].focus();
+  if (!inputs.length) return;
 
-inputs.forEach((input, index) => {
-  input.addEventListener("input", (e) => {
-    if (e.target.value && index < inputs.length - 1) {
-      inputs[index + 1].focus();
-    }
-  });
+  inputs[0].focus();
 
-  input.addEventListener("keydown", (e) => {
-    if (e.key === "Backspace") {
-      if (input.value === "" && index > 0) {
-        inputs[index - 1].focus();
+  inputs.forEach((input, index) => {
+
+    input.addEventListener("input", () => {
+      if (input.value && index < inputs.length - 1) {
+        inputs[index + 1].focus();
       }
-    }
+    });
+
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Backspace") {
+        if (input.value === "" && index > 0) {
+          inputs[index - 1].focus();
+        } else {
+          input.value = "";
+        }
+      }
+    });
+
   });
 });
